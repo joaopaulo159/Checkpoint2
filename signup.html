@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="styles/acesso.css">
 
   <!-- ---------------------- lógica aplicada no registro -------------------- -->
-  <script src="/scripts/utils.js"></script>
-  <script src="/scripts/signup.js"></script>
+  <!-- <script src="/scripts/utils.js"></script>
+  <script src="/scripts/signup.js"></script> -->
 
 </head>
 
@@ -27,35 +27,35 @@
         <p>To-Do App</p>
       </div>
 
-      <label>
+      <label for="Nome">
         Nome:
-        <input type="text">
+        <input type="text" id="Nome">
       </label>
-      <label>
+      <label for="Sobrenome">
         Sobrenome:
-        <input type="text">
+        <input type="text" id="Sobrenome">
       </label>
-      <label>
+      <label for="Email">
         Email:
-        <input type="email">
+        <input type="email" id="Email">
       </label>
-      <label>
+      <label for="Password">
         Senha:
-        <input type="password">
+        <input type="password" id="Password">
       </label>
-      <label>
+      <label for="PasswordRepeat">
         Repetir senha:
-        <input type="password">
+        <input type="password" id="PasswordRepeat">
       </label>
 
-      <button>Criar conta</button>
+      <button id="enviar">Criar conta</button>
 
     </form>
     <div class="ingressar">
       <a href="index.html">Já possui conta? Acesse aqui</a>
     </div>
   </div>
-
+<script src="./app.js"></script>
 </body>
 
 </html>
