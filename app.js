@@ -6,7 +6,7 @@ EnviarFormularioBotao.addEventListener('click', event => {
 
   event.preventDefault()
 
-  criarUsuario()
+  createUser()
 })
 
 for(let input of ObterTodosFormulario) {
@@ -16,19 +16,19 @@ for(let input of ObterTodosFormulario) {
       const inputValue = input.value
       const inputId = input.id
 
-      Entrada[inputId] = inputValue
+      formData[inputId] = inputValue
 
-      console.log(Entrada)
+      console.log(formData)
 
   })
 
 }
 
-var Entrada = {
-  Nome: '',
-  Sobrenome: '',
-  Email: '',
-  Password: '',
+var formData = {
+  firsName: '',
+  lastName: '',
+  email: '',
+  password: '',
   PasswordRepeat: ''
 }
 var requestHeaders = {
@@ -44,9 +44,9 @@ var requestPostConfiguration = {
 
 
 
-function criarUsuario() {
+function createUser() {
 
-  requestPostConfiguration.body = JSON.stringify(Entrada)
+  requestPostConfiguration.body = JSON.stringify(formData)
 
     fetch('https://ctd-todo-api.herokuapp.com/v1/users', requestPostConfiguration).then(
 
