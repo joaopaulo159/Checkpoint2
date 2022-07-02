@@ -116,3 +116,9 @@ span img {
   cursor: pointer;
   float: right;
 }
+
+.passwordInput {
+  width: 90%
+}
+
+
