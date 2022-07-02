@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do App | Login</title>
+
+  <link rel="stylesheet" href="../styles/acesso.css">
+
+</head>
+
+<body>
+  <div class="left">
+    <img src="../assets/pessoa-login.png" alt="">
+  </div>
+
+  <div class="right">
+    <form>
+      <div class="form-header">
+        <p>To-Do App</p>
+      </div>
+      <h1>Acessar</h1>
+
+      <div class="form-control">
+
+        <label for="userEmail">E-mail:</label>
+        <input type="email" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" id="userEmail" name="email" minlength="6" required>
+        <small>Forneça um e-mail válido</small> 
+
+    </div>
+
+    <div class="form-control" id="password">
+
+        <label for="userPassword">Senha:</label>
+        <span class="eye-password">
+          <input class="passwordInput" type="password" pattern=".{8,}" id="userPassword" minlength="8" required>
+          <img class="img-eye" src="../assets/eye.svg" alt="">
+        </span>
+        <small>Forneça uma senha válida</small>
+
+    </div>
+
+      <button type="submit" id="loginButton">Acessar</button>
+
+    </form>
+    <div class="ingressar">
+      <a href="./signup.html">Não possui conta? Crie agora mesmo</a>
+    </div>
+  </div>
+
+  <script src="../scripts/login.js"></script>
+
+</body>
+
+</html>
