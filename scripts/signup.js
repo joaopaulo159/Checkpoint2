@@ -1,86 +1,118 @@
-// Validação do formulário
+var labelElements = document.querySelectorAll('label')
+var createUserButton = document.querySelector('#createUserbutton')
+var userPassword = document.querySelector('#userPassword')
+var userPasswordConfirm = document.querySelector('#userPasswordConfirm')
+var inputElements = document.querySelectorAll('input')
 
-const formControlsElements = document.querySelectorAll('.form-control')
-const createUserButtonElement = document.querySelector('#createUserButton')
-const userPasswordConfirmElement = document.querySelector('#userPasswordConfirm')
-const userpassWordElement = document.querySelector('#userPassword')
 
-let spanElements = document.querySelector('span')
-let passwordInputsElements = document.querySelector('.passwordInput')
-let passwordImg = document.querySelector('.img-eye')
+var signupValid = {
+    userfirstName:false,
+    userlastName:false,
+    useremail:false,
+    userpassword:false,
+    userPasswordConfirm:false}
 
-passwordImg.addEventListener('click', event => {
+    
+for (let labelElement of labelElements){
 
-    spanElements.classList.toggle('visible');
+    var labelChildren = labelElement.children[0]
 
-    if(spanElements.classList.contains('visible')) {
-        passwordImg.src = '../assets/eye-off.svg';
-        passwordInputsElements.type = 'text'
-    } else {
-        passwordImg.src = '../assets/eye.svg';
-        passwordInputsElements.type = 'password'
+    labelChildren.addEventListener('keyup',event =>{
+
+      var signElement = event.target.checkValidity()
+
+      signupValid[event.target.id] = signElement
+
+      if (signElement){
+        labelElement.classList.remove('error')
+        
+      }
+        else{
+          labelElement.classList.add('error')
+        }
+      
+
+    })
+
+}
+
+
+userPasswordConfirm.addEventListener('keyup',event =>{
+    if(userPassword.value == userPasswordConfirm.value){
+        labelElements[3].classList.remove('error')
+    }else{
+        labelElements[4].classList.add('error')
     }
-});
-
-var formValidation = {
-    firstName: false,
-    lastName:false,
-    userEmail: false,
-    userPassword:false,
-    userPasswordConfirm:false
-} 
-
-createUserButtonElement.addEventListener ('click', event => {
-
-    event.preventDefault()
-
-     let formValid =  Object.values(formValidation).every(Boolean)
-     
-     if(formValid) {
-
-        alert('Cadastro bem sucedido. Realize o login para acesso a sua página.')
-
-        window.location = './login.html'
-
-    } else {
-
-        alert('O formulário não está preenchido corretamente.')
-    } 
-
 })
 
 
-for (let control of formControlsElements) {
 
-    const controlInputElement = control.children[1]
-
-    controlInputElement.addEventListener('keyup', event => {
-
-        let inputValid = event.target.checkValidity()
-
-        formValidation[event.target.id] = inputValid
- 
-        if(inputValid){
-
-            control.classList.remove('error')
-            
-        } else {
-
-            control.classList.add('error')
-        }
-    })
-} 
-
-// Validação das senhas
-
-userPasswordConfirmElement.addEventListener('keyup', event => {
-
-    if (userpassWordElement.value == userPasswordConfirmElement.value) {
-
-       formControlsElements[3].classList.remove('error')
-        
-        } else {
-        formControlsElements[3].classList.add('error')
-        }
+    var cadastro = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
     }
-)
+
+    var requestHeaders = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+    
+    var requestPostConfiguration = {
+        method: 'POST',
+        headers: requestHeaders
+    }
+    
+    function createUser() {
+    
+        requestPostConfiguration.body = JSON.stringify(cadastro)
+    
+    
+          fetch('https://ctd-todo-api.herokuapp.com/v1/users', requestPostConfiguration).then(
+    
+            response => {
+    
+                response.json().then(
+    
+                    info => {
+    
+                        if(response.ok == true) {
+    
+                            alert('Parabnes! Usuário criado com sucesso.')
+    
+                        } else {
+    
+                            if(info === 'El usuario ya se encuentra registrado') {
+    
+                                alert('O e-mail digitado ja esta cadastrado')
+    
+                            }
+    
+                        }
+    
+                    }
+    
+                )
+    
+            }
+    
+        )
+    
+    }
+
+   
+    createUserButton.addEventListener('click',event =>{
+        event.preventDefault()
+        createUser()     
+    for(let input of inputElements){
+        input.addEventListener('keyup',event =>{
+            
+            var inputValue = input.value
+            var inputID = input.id
+    
+            console.log(cadastro[inputID] = inputValue)
+            
+        })
+    }
+})
