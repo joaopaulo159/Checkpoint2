@@ -52,6 +52,15 @@ function loginUser(){
       response.json().then(
         sucess =>{
           console.log(localStorage.setItem('token',sucess.jwt))
+
+          if(response.ok == true) {
+
+            window.location = './tarefas.html'
+      
+        } else {
+      
+            alert('Usuário não encontrado')
+        }
         }
       )
     }
