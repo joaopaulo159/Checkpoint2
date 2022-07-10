@@ -73,7 +73,7 @@ button {
 }
 .left{
   width: 50%;  
-  background-color: white;
+  background: linear-gradient(var(--primary), var(--secondary));
   text-align: center;
   display: flex;
   align-items: center;
@@ -94,5 +94,3 @@ button {
   background-color: #ff9999;
   border: 2px solid rgb(147, 147, 147)
 }
-
-123123123123
