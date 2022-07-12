@@ -69,7 +69,7 @@ userPasswordConfirm.addEventListener('keyup',event =>{
         requestPostConfiguration.body = JSON.stringify(cadastro)
     
     
-          fetch('https://ctd-todo-api.herokuapp.com/v1/users', requestPostConfiguration).then(
+          fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/users', requestPostConfiguration).then(
     
             response => {
     

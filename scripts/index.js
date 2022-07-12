@@ -47,7 +47,7 @@ var requestPostConfiguration = {
 }
 function loginUser(){
   requestPostConfiguration.body = JSON.stringify(loginvalues)
-  fetch('https://ctd-todo-api.herokuapp.com/v1/users/login',requestPostConfiguration).then(
+  fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/users/login',requestPostConfiguration).then(
     response =>{
       response.json().then(
         sucess =>{

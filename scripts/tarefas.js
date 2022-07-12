@@ -21,7 +21,7 @@ console.log (token)
 
 
 function getUser(){
-    fetch('https://ctd-todo-api.herokuapp.com/v1/users/getMe',requestConfiguration).then(
+    fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/users/getMe',requestConfiguration).then(
         response =>{
             response.json().then(
                 sucess =>{
@@ -40,7 +40,7 @@ let appointmentDone = document.querySelector('.tarefas-terminadas')
 var appointmentNotDone = document.querySelector('.tarefas-pendentes')
 
 function getTasks(){
-    fetch('https://ctd-todo-api.herokuapp.com/v1/tasks',requestConfiguration).then(
+    fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks',requestConfiguration).then(
         response =>{
             response.json().then(
                 appointments =>{
@@ -96,7 +96,7 @@ var requestPostConfiguration = {
 
 function postTask(){
     requestPostConfiguration.body = JSON.stringify(objectPost)
-    fetch('https://ctd-todo-api.herokuapp.com/v1/tasks', requestPostConfiguration).then(
+    fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks', requestPostConfiguration).then(
         response =>{
             response.json().then(
                 tasks =>{
