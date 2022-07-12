@@ -1,3 +1,4 @@
+var formControlsElements = document.querySelectorAll('.form-control')
 var labelElements = document.querySelectorAll('label')
 var createUserButton = document.querySelector('#createUserbutton')
 var userPassword = document.querySelector('#userPassword')
