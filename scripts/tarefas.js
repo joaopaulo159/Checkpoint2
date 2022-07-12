@@ -10,28 +10,18 @@ var requestHeaders = {
 }
 
 
-
-var post = {
-    description: "",
-    completed: false
-  }
-
   var requestConfiguration = {
     method: 'GET',
     headers: requestHeaders,
     
 }  
 
-var requestPostConfiguration = {
-    method: 'POST',
-    headers: requestHeaders,
-    body:JSON.stringify(post)
-}
+console.log (token)
 
 
 
 function getUser(){
-    fetch('https://ctd-todo-api.herokuapp.com/v1/users/getMe',requestConfiguration).then(
+    fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/users/getMe',requestConfiguration).then(
         response =>{
             response.json().then(
                 sucess =>{
@@ -50,10 +40,12 @@ let appointmentDone = document.querySelector('.tarefas-terminadas')
 var appointmentNotDone = document.querySelector('.tarefas-pendentes')
 
 function getTasks(){
-    fetch('https://ctd-todo-api.herokuapp.com/v1/tasks',requestConfiguration).then(
+    fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks',requestConfiguration).then(
         response =>{
             response.json().then(
                 appointments =>{
+                    appointmentNotDone.innerHTML = ""
+                    appointmentDone.innerHTML = ""
                     for(let appointment of appointments){
 
                     if(appointment.completed == true){
@@ -83,19 +75,46 @@ function getTasks(){
 
 getTasks()
 
+var objectPost = {
+    description: "",
+    completed: false
+  }  
+
+var inputIDElement = document.querySelector('#description')
+inputIDElement.addEventListener('keyup',event =>{
+    event.preventDefault()
+    objectPost[inputIDElement.id]=inputIDElement.value
+    console.log(objectPost)
+    
+})
+
+
+var requestPostConfiguration = {
+    method: 'POST',
+    headers: requestHeaders,
+    
+}
+
+  
+
 function postTask(){
-    fetch('https://ctd-todo-api.herokuapp.com/v1/tasks',requestPostConfiguration).then(
+    requestPostConfiguration.body = JSON.stringify(objectPost)
+    fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks', requestPostConfiguration).then(
         response =>{
             response.json().then(
                 tasks =>{
                     console.log(tasks)
                 })
             })
+        getTasks()    
         }
 
 
+var buttonAddTask = document.querySelector('#addTask')
 
-// para postTask funcionar precisa captar valor do input e inserilo no obejto "post"
-// captar o botão de (+)
-// adicionar um evento no botão (+) que chama a post tasks,que enviara os dados para API
-// no final chamar a funcao getTasks() para atualizar o array de tarefas.
+buttonAddTask.addEventListener('click',response =>{
+    response.preventDefault()
+    postTask()
+    getTasks()
+    inputIDElement.value = ""
+})
