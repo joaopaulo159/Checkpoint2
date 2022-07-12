@@ -44,6 +44,8 @@ function getTasks(){
         response =>{
             response.json().then(
                 appointments =>{
+                    appointmentNotDone.innerHTML = ""
+                    appointmentDone.innerHTML = ""
                     for(let appointment of appointments){
 
                     if(appointment.completed == true){
@@ -79,12 +81,13 @@ var objectPost = {
   }  
 
 var inputIDElement = document.querySelector('#description')
-
 inputIDElement.addEventListener('keyup',event =>{
+    event.preventDefault()
     objectPost[inputIDElement.id]=inputIDElement.value
     console.log(objectPost)
     
 })
+
 
 var requestPostConfiguration = {
     method: 'POST',
@@ -112,5 +115,6 @@ var buttonAddTask = document.querySelector('#addTask')
 buttonAddTask.addEventListener('click',response =>{
     response.preventDefault()
     postTask()
-    
+    getTasks()
+    inputIDElement.value = ""
 })
