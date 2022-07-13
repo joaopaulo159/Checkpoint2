@@ -5,14 +5,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-Do App</title>
+  <title>To-Do App |  Sign Up
+  </title>
 
   <!-- ---------------- estilos compartilhados entre login e signup ---------------- -->
   <link rel="stylesheet" href="../styles/acesso.css">
 
-  <!-- ---------------------- lógica aplicada no registro -------------------- -->
-  <script src="/scripts/utils.js"></script>
-  
 
 </head>
 
@@ -26,37 +24,62 @@
       <div class="form-header">
         <p>To-Do App</p>
       </div>
+      <h1>Sign Up</h1>
+      
+      <div class="form-control">
 
-      <label for="firstName">
-         Nome:
+        <label for="firstName">Nome:</label>
         <input type="text" id="firstName" minlength="6" required>
-      </label>
-      <label for="lastName">
-        Sobrenome:
-        <input type="text" id="lastName" >
-      </label>
-      <label for="userEmail">
-        Email:
-        <input type="email" id="email" required>
-      </label>
-      <label for="userPassword">
-        Senha:
-        <input type="password" id="password" minlength="8" required>
-      </label>
-      <label for="userPasswordConfirm">
-        Repetir senha:
-        <input type="password" id="userPasswordConfirm" required>
-      </label>
+        <small>Forneça um nome válido</small>
+
+    </div>
+
+    <div class="form-control">
+
+      <label for="lastName">Sobrenome:</label>
+      <input type="text" id="lastName" minlength="6" required>
+      <small>Forneça um sobrenome válido</small>
+
+  </div>
+
+    <div class="form-control">
+
+        <label for="userEmail">E-mail:</label>
+        <input type="email" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" id="email" name="email" minlength="6" required>
+        <small>Forneça um e-mail válido</small> 
+
+    </div>
+
+    <div class="form-control">
+
+        <label for="userPassword">Senha:</label>
+        <input type="password" pattern=".{8,}"  id="password" minlength="8" required>
+        <small>Forneça uma senha válida</small>
+
+    </div>
+
+    <div class="form-control" id="password">
+
+        <label for="userPasswordConfirm">Digite novamente a senha:</label>
+        <span class="eye-password">
+          <input class="passwordInput" type="password" pattern=".{8,}" id="passwordConfirm" minlength="8" required>
+          <img class="img-eye" src="../assets/eye.svg" alt="">
+        </span>
+        <small>Forneça uma confirmação de senha válida</small>
+
+    </div>
 
 
-      <button id="createUserbutton">Criar conta</button>
+      <button type="submit" id="createUserButton">Criar conta</button>
 
     </form>
     <div class="ingressar">
       <a href="index.html">Já possui conta? Acesse aqui</a>
     </div>
   </div>
-  <script src="../script/signup.js"></script>
+
+  <script src="../scripts/signup.js"></script>
+
 </body>
 
 </html>

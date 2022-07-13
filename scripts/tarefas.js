@@ -41,6 +41,7 @@ var appointmentNotDone = document.querySelector('.tarefas-pendentes')
 
 function getTasks(){
     fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks',requestConfiguration).then(
+
         response =>{
             response.json().then(
                 appointments =>{
@@ -48,19 +49,32 @@ function getTasks(){
                     appointmentDone.innerHTML = ""
                     for(let appointment of appointments){
 
+                        let dataCriacao = new Date(appointment.createdAt)
+                        let dataFormatada = dataCriacao.toLocaleDateString(
+                            'pt-BR',
+                            {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric'
+                            }
+                        )  
+
+                        console.log(dataFormatada)
+
                     if(appointment.completed == true){
+
                         appointmentDone.innerHTML +=`<li class="tarefa">
                         <div class="done"></div>
                         <div class="descricao">
                           <p class="nome">${appointment.description}</p>
-                          <p class="timestamp">${appointment.createdAt}</p>
+                          <p class="timestamp"> Criada em: ${dataFormatada}</p>
                         </div>`
                     }else{
                         appointmentNotDone.innerHTML += `<li class="tarefa">
                         <div class="not-done"></div>
                         <div class="descricao">
                         <p class="nome">${appointment.description}</p>
-                        <p class="timestamp">${appointment.createdAt}</p>
+                        <p class="timestamp">Criada em: ${dataFormatada}</p>
                         </div>
                       </li>`
 
@@ -81,8 +95,11 @@ var objectPost = {
   }  
 
 var inputIDElement = document.querySelector('#description')
-inputIDElement.addEventListener('keyup',event =>{
+
+inputIDElement.addEventListener('keyup', event =>{
+
     event.preventDefault()
+
     objectPost[inputIDElement.id]=inputIDElement.value
     console.log(objectPost)
     
@@ -118,3 +135,5 @@ buttonAddTask.addEventListener('click',response =>{
     getTasks()
     inputIDElement.value = ""
 })
+
+
