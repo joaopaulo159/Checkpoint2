@@ -49,19 +49,32 @@ function getTasks(){
                     appointmentDone.innerHTML = ""
                     for(let appointment of appointments){
 
+                        let dataCriacao = new Date(appointment.createdAt)
+                        let dataFormatada = dataCriacao.toLocaleDateString(
+                            'pt-BR',
+                            {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric'
+                            }
+                        )  
+
+                        console.log(dataFormatada)
+
                     if(appointment.completed == true){
+
                         appointmentDone.innerHTML +=`<li class="tarefa">
                         <div class="done"></div>
                         <div class="descricao">
                           <p class="nome">${appointment.description}</p>
-                          <p class="timestamp">${appointment.createdAt}</p>
+                          <p class="timestamp"> Criada em: ${dataFormatada}</p>
                         </div>`
                     }else{
                         appointmentNotDone.innerHTML += `<li class="tarefa">
                         <div class="not-done"></div>
                         <div class="descricao">
                         <p class="nome">${appointment.description}</p>
-                        <p class="timestamp">${appointment.createdAt}</p>
+                        <p class="timestamp">Criada em: ${dataFormatada}</p>
                         </div>
                       </li>`
 
@@ -124,13 +137,3 @@ buttonAddTask.addEventListener('click',response =>{
 })
 
 
-/* let dataCriacao = new Date(task.createdAt)
-
-let dataCriacaoFormatada = dataCriacao.toLocaleDateString(
-    'pt-BR',
-       {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-       }
-    ) */
