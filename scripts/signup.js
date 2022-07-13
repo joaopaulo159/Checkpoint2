@@ -84,7 +84,7 @@ userPasswordConfirm.addEventListener('keyup', event => {
                         if(response.ok == true) {
     
                             alert('Parabéns! Usuário criado com sucesso.')
-                            window.location = '../pages/login.html'
+                            window.location = '../pages/index.html'
     
                         } else {
     
@@ -149,3 +149,6 @@ passwordImg.addEventListener('click', event => {
         passwordInputsElements.type = 'password'
     }
 });
+
+
+console.log(cadastro)
