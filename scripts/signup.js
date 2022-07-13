@@ -1,50 +1,53 @@
 var formControlsElements = document.querySelectorAll('.form-control')
 var labelElements = document.querySelectorAll('label')
-var createUserButton = document.querySelector('#createUserbutton')
-var userPassword = document.querySelector('#userPassword')
-var userPasswordConfirm = document.querySelector('#userPasswordConfirm')
+var createUserButton = document.querySelector('#createUserButton')
+var userPassword = document.querySelector('#password')
+var userPasswordConfirm = document.querySelector('#passwordConfirm')
 var inputElements = document.querySelectorAll('input')
 
 
 var signupValid = {
-    userfirstName:false,
-    userlastName:false,
-    useremail:false,
-    userpassword:false,
-    userPasswordConfirm:false}
-
-    
-for (let labelElement of labelElements){
-
-    var labelChildren = labelElement.children[0]
-
-    labelChildren.addEventListener('keyup',event =>{
-
-      var signElement = event.target.checkValidity()
-
-      signupValid[event.target.id] = signElement
-
-      if (signElement){
-        labelElement.classList.remove('error')
-        
-      }
-        else{
-          labelElement.classList.add('error')
-        }
-      
-
-    })
-
+    firstName:false,
+    lastName:false,
+    email:false,
+    password:false,
+    passwordConfirm:false
 }
 
+    
+for (let control of formControlsElements) {
 
-userPasswordConfirm.addEventListener('keyup',event =>{
-    if(userPassword.value == userPasswordConfirm.value){
-        labelElements[3].classList.remove('error')
-    }else{
-        labelElements[4].classList.add('error')
+    const controlInputElement = control.children[1]
+
+    controlInputElement.addEventListener('keyup', event => {
+
+        let inputValid = event.target.checkValidity()
+
+        signupValid[event.target.id] = inputValid
+ 
+        if(inputValid){
+
+            control.classList.remove('error')
+            
+        } else {
+
+            control.classList.add('error')
+        }
+    })
+} 
+
+
+userPasswordConfirm.addEventListener('keyup', event => {
+
+    if (userPassword.value === userPasswordConfirm.value) {
+
+       formControlsElements[3].classList.remove('error')
+        
+        } else {
+        formControlsElements[3].classList.add('error')
+        }
     }
-})
+)
 
 
 
@@ -80,7 +83,8 @@ userPasswordConfirm.addEventListener('keyup',event =>{
     
                         if(response.ok == true) {
     
-                            alert('Parabnes! Usuário criado com sucesso.')
+                            alert('Parabéns! Usuário criado com sucesso.')
+                            window.location = '../pages/login.html'
     
                         } else {
     
@@ -104,16 +108,44 @@ userPasswordConfirm.addEventListener('keyup',event =>{
 
    
     createUserButton.addEventListener('click',event =>{
+
         event.preventDefault()
-        createUser()     
-    for(let input of inputElements){
-        input.addEventListener('keyup',event =>{
-            
-            var inputValue = input.value
-            var inputID = input.id
-    
-            console.log(cadastro[inputID] = inputValue)
-            
-        })
-    }
+
+        let formValid =  Object.values(signupValid).every(Boolean)
+     
+        if(formValid) {
+            createUser()  
+        } else {
+            alert('Preencha o formulário corretamente.')
+        }     
+
 })
+
+for(let input of inputElements){
+    input.addEventListener('keyup', event =>{
+        
+        var inputValue = input.value
+        var inputID = input.id
+
+        console.log(cadastro[inputID] = inputValue)
+        
+    })
+}
+
+let spanElements = document.querySelector('span')
+let passwordInputsElements = document.querySelector('.passwordInput')
+let passwordImg = document.querySelector('.img-eye')
+
+
+passwordImg.addEventListener('click', event => {
+
+    spanElements.classList.toggle('visible');
+
+    if(spanElements.classList.contains('visible')) {
+        passwordImg.src = '../assets/eye-off.svg';
+        passwordInputsElements.type = 'text'
+    } else {
+        passwordImg.src = '../assets/eye.svg';
+        passwordInputsElements.type = 'password'
+    }
+});

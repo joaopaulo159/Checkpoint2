@@ -1,37 +1,38 @@
-var indexLabelElements = document.querySelectorAll('label')
-var createLoginButton = document.querySelector('#userLogin')
+var formControlsElements = document.querySelectorAll('.form-control')
+var loginLabelElements = document.querySelectorAll('label')
+var createLoginButton = document.querySelector('#loginButton')
 var inputElements = document.querySelectorAll('input')
+var userEmailValue = document.querySelector('#email')
+
 var loginValidity = {
     
-    inputEmail: false,
-    inputPassword: false
+    email: false,
+    password: false
 
 }
 
-for (let labelElement of indexLabelElements){
-    const newElementChildren = labelElement.children[0]
+for (let control of formControlsElements) {
 
-    newElementChildren.addEventListener('keyup',event =>{
+    const controlInputElement = control.children[1]
 
-    var inputValid = event.target.checkValidity()
+    controlInputElement.addEventListener('keyup', event => {
 
-    loginValidity[event.target.id] = inputValid 
-    
-         
-    if (inputValid){
-      labelElement.classList.remove('error')
-      
-    }
-      else{
-        labelElement.classList.add('error')
-      }
-  
-  
-  })
-  
-  }
+        let inputValid = event.target.checkValidity()
 
-  let loginvalues = {
+        loginValidity[event.target.id] = inputValid
+ 
+        if(inputValid){
+
+            control.classList.remove('error')
+            
+        } else {
+
+            control.classList.add('error')
+        }
+    })
+} 
+
+  let loginValues = {
     email: " ",
     password: " "
   }
@@ -45,52 +46,79 @@ var requestPostConfiguration = {
     method: 'POST',
     headers: requestHeaders
 }
+
+
 function loginUser(){
-  requestPostConfiguration.body = JSON.stringify(loginvalues)
+  requestPostConfiguration.body = JSON.stringify(loginValues)
   fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/users/login',requestPostConfiguration).then(
     response =>{
-      response.json().then(
-        sucess =>{
-          console.log(localStorage.setItem('token',sucess.jwt))
 
-          if(response.ok == true) {
+            if(response.ok === true){
+                
+                response.json().then(
 
-            window.location = './tarefas.html'
-      
-        } else {
-      
-            alert('Usuário não encontrado')
-        }
-        }
-      )
+                    info => {
+                        localStorage.setItem('token', info.jwt)
+
+                        window.location.href = '../pages/tarefas.html'
+                    }
+                )
+
+            } else {
+
+                alert('Dados incorretos ou usuário não encontrado')
+
+            }
     }
   )
 }
 
 for(let input of inputElements){
       
-  input.addEventListener('keyup',event=>{
-  
-    var inputValue = input.value
-    var inputID = input.id
+    input.addEventListener('keyup',event=>{
+        
+      event.preventDefault()
+      var inputValue = input.value
+      var inputID = input.id
 
-    console.log(loginvalues[inputID] = inputValue)
-  })
+      console.log(loginValues[inputID] = inputValue)
+    })
 
-  
+  }
 
-}
 
   createLoginButton.addEventListener('click',event =>{
 
     event.preventDefault()
 
-    loginUser()
+    let loginValid = Object.values(loginValidity).every(Boolean)
 
-  
-    
+    if(loginValid) {
+
+        loginUser()
+
+    }
     
   })
+
+
+let spanElements = document.querySelector('span')
+let passwordInputsElements = document.querySelector('.passwordInput')
+let passwordImg = document.querySelector('.img-eye')
+
+passwordImg.addEventListener('click', event => {
+
+    spanElements.classList.toggle('visible');
+
+    if(spanElements.classList.contains('visible')) {
+        passwordImg.src = '../assets/eye-off.svg';
+        passwordInputsElements.type = 'text'
+    } else {
+        passwordImg.src = '../assets/eye.svg';
+        passwordInputsElements.type = 'password'
+    }
+});
+
 
 
 

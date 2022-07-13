@@ -41,6 +41,7 @@ var appointmentNotDone = document.querySelector('.tarefas-pendentes')
 
 function getTasks(){
     fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks',requestConfiguration).then(
+
         response =>{
             response.json().then(
                 appointments =>{
@@ -81,8 +82,11 @@ var objectPost = {
   }  
 
 var inputIDElement = document.querySelector('#description')
-inputIDElement.addEventListener('keyup',event =>{
+
+inputIDElement.addEventListener('keyup', event =>{
+
     event.preventDefault()
+
     objectPost[inputIDElement.id]=inputIDElement.value
     console.log(objectPost)
     
@@ -118,3 +122,15 @@ buttonAddTask.addEventListener('click',response =>{
     getTasks()
     inputIDElement.value = ""
 })
+
+
+/* let dataCriacao = new Date(task.createdAt)
+
+let dataCriacaoFormatada = dataCriacao.toLocaleDateString(
+    'pt-BR',
+       {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+       }
+    ) */
