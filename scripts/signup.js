@@ -149,6 +149,3 @@ passwordImg.addEventListener('click', event => {
         passwordInputsElements.type = 'password'
     }
 });
-
-
-console.log(cadastro)
