@@ -1,5 +1,6 @@
 let token = localStorage.getItem('token')
 let userInfo = document.querySelector('.user-info')
+let finalizar = document.getElementById('closeApp')
 
 
 
@@ -137,3 +138,13 @@ buttonAddTask.addEventListener('click',response =>{
 })
 
 
+finalizar.addEventListener('click',response =>{
+    response.preventDefault()
+   populateStorage()
+   alert('Sessão finalizada')
+   window.location=`./index.html`
+})
+
+function populateStorage() {
+    localStorage.removeItem('token');
+  }
