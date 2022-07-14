@@ -62,24 +62,34 @@ function getTasks(){
 
                         console.log(dataFormatada)
 
-                    if(appointment.completed == true){
-
-                        appointmentDone.innerHTML +=`<li class="tarefa">
-                        <div class="done"></div>
-                        <div class="descricao">
-                          <p class="nome">${appointment.description}</p>
-                          <p class="timestamp"> Criada em: ${dataFormatada}</p>
-                        </div>`
-                    }else{
-                        appointmentNotDone.innerHTML += `<li class="tarefa">
-                        <div class="not-done"></div>
-                        <div class="descricao">
-                        <p class="nome">${appointment.description}</p>
-                        <p class="timestamp">Criada em: ${dataFormatada}</p>
-                        </div>
-                      </li>`
-
-                    }
+                        if(appointment.completed === true){
+                            appointmentDone.innerHTML +=`<li class="tarefa">
+                            <div class="done" id="${appointment.id}" onclick="updateTask(${appointment.id},${appointment.completed})">
+                            <button class="circulo"></button></div>
+                            <div class="descricao">
+                              <p class="nome">${appointment.description}</p>
+                              <button class="deleteButton">Delete</button>
+                              <p class="timestamp">${appointment.createdAt}</p>
+                              
+                            </div>`
+                        }else{
+                            appointmentNotDone.innerHTML += `<li class="tarefa">
+                            <div class="not-done" id="${appointment.id}" onclick="updateTask(${appointment.id},${appointment.completed})"></div>
+                            <div class="descricao">
+                            <p class="nome">${appointment.description}</p>
+                            <button class="deleteButton">Delete</button>
+                            <p class="timestamp">${appointment.createdAt}</p>
+                            
+                            </div>
+                          </li>`
+    
+                        }
+                        let deleteButton = document.querySelector('.deleteButton')
+                        
+                            deleteButton.addEventListener('click',event =>{        
+                            deleteTask(`${appointment.id}`)
+                            getTasks()
+                            })          
                 }
                 }    
             )
@@ -90,6 +100,44 @@ function getTasks(){
 
 getTasks()
 
+function deleteTask(id){
+
+    var requestDeleteConfiguration = {
+        method:'DELETE',
+        headers:requestHeaders
+      }
+    fetch(`https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks/${id}`,requestDeleteConfiguration).then(
+        sucess => {
+            sucess.json().then(
+                stats => {
+                    console.log("Deletado!!!")
+                }
+            )
+        }
+    )
+    
+  }
+
+  function updateTask(id,completed){
+
+    var requestPutConfiguration = {
+        method:'PUT',
+        body:JSON.stringify({completed: !completed}),
+        headers:requestHeaders
+      }
+    fetch(`https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks/${id}`,requestPutConfiguration).then(
+        sucess => {
+            sucess.json().then(
+                stats => {
+                    console.log("deu certo!!!")
+                }
+            )
+        }
+    )
+    getTasks()
+    
+  }
+
 var objectPost = {
     description: "",
     completed: false
@@ -98,12 +146,8 @@ var objectPost = {
 var inputIDElement = document.querySelector('#description')
 
 inputIDElement.addEventListener('keyup', event =>{
-
-    event.preventDefault()
-
     objectPost[inputIDElement.id]=inputIDElement.value
-    console.log(objectPost)
-    
+
 })
 
 

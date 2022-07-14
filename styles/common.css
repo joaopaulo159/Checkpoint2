@@ -18,7 +18,13 @@ body {
 }
 
 button {
-  border: none;
-  border-radius: 3px;
+  border:solid;
+  border-color: black;
+  border-width: 1px;
+  border-radius: 8px;
   cursor: pointer;
+  width: 70px;
+  height: 20px;
+  background-color: rgb(226, 153, 153);
+  z-index: 500;
 }

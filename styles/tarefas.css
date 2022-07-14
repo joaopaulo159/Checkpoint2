@@ -137,6 +137,27 @@ a {
   transition: background-color 200ms linear;
 }
 
+.circulo {
+  position: relative;
+  left: -10px;
+  height: 2.3em;
+  width: 2.3em;
+  background-color: white;
+  box-shadow: 2px 2px 5px lightgrey;
+  border: 2px solid var(--secondary);
+  z-index: 4;
+  transition: background-color 200ms linear;
+  border-radius: 20px
+
+}
+
+.deleteButton{
+  right: 550px;
+  position: absolute;
+  align-items: center;
+
+}
+
 .tarefa .not-done:hover {
   background-color: var(--secondary);
 }
