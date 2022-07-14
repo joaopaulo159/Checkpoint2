@@ -18,13 +18,13 @@ body {
 }
 
 button {
-  border:solid;
-  border-color: black;
-  border-width: 1px;
-  border-radius: 8px;
+  border:none;
+  border-radius: 20px;
   cursor: pointer;
-  width: 70px;
-  height: 20px;
-  background-color: rgb(226, 153, 153);
-  z-index: 500;
+  background-color: #7898FF;
+}
+
+button:hover{
+  background-color: #8E64C5;
+  transition: 0.2s;
 }

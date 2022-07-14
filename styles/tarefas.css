@@ -39,11 +39,20 @@ a {
 #closeApp{
   margin-left: 15px;
   font-size: .7em;
-  background-color: rgb(218, 88, 88);
+  background-color: rgb(204, 34, 34);
   color: white;
   border-radius: 50vh;
-  padding: 5px 10px;
+  padding: 0px 10px;
   cursor: pointer;
+  border: none;
+  width: 70px;
+  height: 30px;
+}
+
+.logout {
+
+  height: 10px;
+  margin-left: 5px;
 }
 
 /* Nova tarefa ----------------------------------------------------------- */
@@ -152,10 +161,16 @@ a {
 }
 
 .deleteButton{
-  right: 550px;
-  position: absolute;
-  align-items: center;
+  position:relative;
+  color:rgb(204, 34, 34);
+  background-color: white;
+  height: 20px;
+  width: 60px;
+  float: right;
+}
 
+.deleteButton:hover{
+  background-color: rgb(245, 210, 210);
 }
 
 .tarefa .not-done:hover {
@@ -263,3 +278,4 @@ a {
   0%{ opacity: 0.5;}
   100%{ opacity: 0.8;}
 }
+
