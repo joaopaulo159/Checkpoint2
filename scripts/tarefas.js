@@ -69,7 +69,7 @@ function getTasks(){
                             <div class="descricao">
                               <p class="nome">${appointment.description}</p>
                               <button class="deleteButton">Delete</button>
-                              <p class="timestamp">${appointment.createdAt}</p>
+                              <p class="timestamp">Criada em: ${dataFormatada}</p>
                               
                             </div>`
                         }else{
@@ -78,7 +78,7 @@ function getTasks(){
                             <div class="descricao">
                             <p class="nome">${appointment.description}</p>
                             <button class="deleteButton">Delete</button>
-                            <p class="timestamp">${appointment.createdAt}</p>
+                            <p class="timestamp">Criada em: ${dataFormatada}</p>
                             
                             </div>
                           </li>`
