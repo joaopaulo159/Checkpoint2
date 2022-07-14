@@ -60,24 +60,21 @@ function getTasks(){
                             }
                         )  
 
-                        console.log(dataFormatada)
-
                         if(appointment.completed === true){
                             appointmentDone.innerHTML +=`<li class="tarefa">
                             <div class="done" id="${appointment.id}" onclick="updateTask(${appointment.id},${appointment.completed})">
                             <button class="circulo"></button></div>
                             <div class="descricao">
                               <p class="nome">${appointment.description}</p>
-                              <button class="deleteButton">Delete</button>
                               <p class="timestamp">Criada em: ${dataFormatada}</p>
                               
                             </div>`
                         }else{
                             appointmentNotDone.innerHTML += `<li class="tarefa">
                             <div class="not-done" id="${appointment.id}" onclick="updateTask(${appointment.id},${appointment.completed})"></div>
+                            <button class="deleteButton"><img class="deleteImg" src="../assets/delete.svg" alt=""></button>
                             <div class="descricao">
                             <p class="nome">${appointment.description}</p>
-                            <button class="deleteButton">Delete</button>
                             <p class="timestamp">Criada em: ${dataFormatada}</p>
                             
                             </div>
@@ -106,11 +103,12 @@ function deleteTask(id){
         method:'DELETE',
         headers:requestHeaders
       }
+
     fetch(`https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks/${id}`,requestDeleteConfiguration).then(
         sucess => {
             sucess.json().then(
                 stats => {
-                    console.log("Deletado!!!")
+                    console.log("Deletado!")
                 }
             )
         }

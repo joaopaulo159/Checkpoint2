@@ -12,11 +12,6 @@
   font-family: 'Lato', sans-serif;
 }
 
-body {
-  background-color: #F6F6F6;
-  min-height: 100vh;
-}
-
 button {
   border:none;
   border-radius: 20px;
@@ -24,7 +19,8 @@ button {
   background-color: #7898FF;
 }
 
-button:hover{
-  background-color: #8E64C5;
-  transition: 0.2s;
+body {
+  background-color: #F6F6F6;
+  min-height: 100vh;
 }
+
