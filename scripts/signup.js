@@ -84,7 +84,7 @@ userPasswordConfirm.addEventListener('keyup', event => {
                         if(response.ok == true) {
     
                             alert('Parabéns! Usuário criado com sucesso.')
-                            window.location = '../pages/index.html'
+                            window.location = '../index.html'
     
                         } else {
     

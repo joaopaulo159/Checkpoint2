@@ -142,7 +142,7 @@ finalizar.addEventListener('click',response =>{
     response.preventDefault()
    populateStorage()
    alert('Sessão finalizada')
-   window.location=`./index.html`
+   window.location=`../index.html`
 })
 
 function populateStorage() {
