@@ -152,7 +152,7 @@ a {
 
 .circulo {
   position: relative;
-  left: -10px;
+  left: px;
   height: 2.3em;
   width: 2.3em;
   background-color: white;

@@ -62,8 +62,9 @@ function getTasks(){
 
                         if(appointment.completed === true){
                             appointmentDone.innerHTML +=`<li class="tarefa">
-                            <div class="done" id="${appointment.id}" onclick="updateTask(${appointment.id},${appointment.completed})">
-                            <button class="circulo"></button></div>
+                            <div class="done" ></div>
+                            <button class="circulo" id="${appointment.id}" onclick="updateTask(${appointment.id},${appointment.completed})"></button>
+                            <button class="deleteButton"><img class="deleteImg" src="../assets/delete.svg" alt=""></button>
                             <div class="descricao">
                               <p class="nome">${appointment.description}</p>
                               <p class="timestamp">Criada em: ${dataFormatada}</p>
