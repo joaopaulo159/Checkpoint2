@@ -83,10 +83,11 @@ function getTasks(){
                         }
                         let deleteButton = document.querySelector('.deleteButton')
                         
-                            deleteButton.addEventListener('click',event =>{        
+                            deleteButton.addEventListener('click', event =>{        
                             deleteTask(`${appointment.id}`)
                             getTasks()
-                            })          
+                            })
+                                  
                 }
                 }    
             )
@@ -96,6 +97,7 @@ function getTasks(){
 
 
 getTasks()
+
 
 function deleteTask(id){
 
@@ -108,6 +110,7 @@ function deleteTask(id){
         sucess => {
             sucess.json().then(
                 stats => {
+                    getTasks()
                     console.log("Deletado!")
                 }
             )
