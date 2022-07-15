@@ -60,7 +60,7 @@ function loginUser(){
                     info => {
                         localStorage.setItem('token', info.jwt)
 
-                        window.location.href = '../pages/tarefas.html'
+                        window.location.href = 'https://joaopaulo159.github.io/Checkpoint2/pages/tarefas.html'
                     }
                 )
 
