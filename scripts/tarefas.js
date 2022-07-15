@@ -22,7 +22,7 @@ console.log (token)
 
 
 function getUser(){
-    fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/users/getMe',requestConfiguration).then(
+   fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/users/getMe',requestConfiguration).then(
         response =>{
             response.json().then(
                 sucess =>{
@@ -37,17 +37,72 @@ function getUser(){
 
 getUser()
 
+function getTaskByID(id){
+    
+    fetch(`https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks/${id}`,requestConfiguration).then(
+        sucess => {
+            sucess.json().then(
+                tasks => {
+                   console.log("ID capturado") 
+                }
+            )
+        }
+    )
+    return id
+  }
+
+  function updateTask(id,completed){
+
+    var requestPutConfiguration = {
+        method:'PUT',
+        body:JSON.stringify({completed: !completed}),
+        headers:requestHeaders
+      }
+    fetch(`https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks/${id}`,requestPutConfiguration).then(
+        sucess => {
+            sucess.json().then(
+                stats => {
+                    console.log("deu certo!!!")
+                }
+            )
+        }
+    )
+   return getTasks()
+    
+  }
+
+  function deleteTask(id){
+    var requestDeleteConfiguration = {
+        method:'DELETE',
+        headers:requestHeaders
+      }
+
+    fetch(`https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks/${id}`,requestDeleteConfiguration).then(
+        sucess => {
+            sucess.json().then(
+                stats => {
+                
+                }
+            )
+        }
+    )
+    return getTasks()
+  }
+
+
 let appointmentDone = document.querySelector('.tarefas-terminadas')
 var appointmentNotDone = document.querySelector('.tarefas-pendentes')
 
 function getTasks(){
-    fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks',requestConfiguration).then(
+    
+    return fetch('https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks',requestConfiguration).then(
 
         response =>{
             response.json().then(
                 appointments =>{
                     appointmentNotDone.innerHTML = ""
                     appointmentDone.innerHTML = ""
+                    
                     for(let appointment of appointments){
 
                         let dataCriacao = new Date(appointment.createdAt)
@@ -70,6 +125,7 @@ function getTasks(){
                               <p class="timestamp">Criada em: ${dataFormatada}</p>
                               
                             </div>`
+                                                   
                         }else{
                             appointmentNotDone.innerHTML += `<li class="tarefa">
                             <div class="not-done" id="${appointment.id}" onclick="updateTask(${appointment.id},${appointment.completed})"></div>
@@ -82,63 +138,24 @@ function getTasks(){
                           </li>`
     
                         }
-                        let deleteButton = document.querySelector('.deleteButton')
                         
-                            deleteButton.addEventListener('click', event =>{        
-                            deleteTask(`${appointment.id}`)
-                            getTasks()
-                            })
+                        document.querySelector('.deleteButton').addEventListener('click', 
+                        event =>{
+                            deleteTask(`${appointment.id}`)   
+                        
+                        })
                                   
                 }
                 }    
             )
         }
     )
+    return location.reload
 }
 
 
 getTasks()
 
-
-function deleteTask(id){
-
-    var requestDeleteConfiguration = {
-        method:'DELETE',
-        headers:requestHeaders
-      }
-
-    fetch(`https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks/${id}`,requestDeleteConfiguration).then(
-        sucess => {
-            sucess.json().then(
-                stats => {
-                    getTasks()
-                    console.log("Deletado!")
-                }
-            )
-        }
-    )
-    
-  }
-
-  function updateTask(id,completed){
-
-    var requestPutConfiguration = {
-        method:'PUT',
-        body:JSON.stringify({completed: !completed}),
-        headers:requestHeaders
-      }
-    fetch(`https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks/${id}`,requestPutConfiguration).then(
-        sucess => {
-            sucess.json().then(
-                stats => {
-                    console.log("deu certo!!!")
-                }
-            )
-        }
-    )
-    getTasks()
-    
-  }
 
 var objectPost = {
     description: "",
@@ -170,7 +187,7 @@ function postTask(){
                     console.log(tasks)
                 })
             })
-        getTasks()    
+        return getTasks()    
         }
 
 
