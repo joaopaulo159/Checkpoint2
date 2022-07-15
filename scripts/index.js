@@ -60,7 +60,7 @@ function loginUser(){
                     info => {
                         localStorage.setItem('token', info.jwt)
 
-                        window.location.href = '../pages/tarefas.html'
+                        window.location.href = './pages/tarefas.html'
                     }
                 )
 
@@ -111,10 +111,10 @@ passwordImg.addEventListener('click', event => {
     spanElements.classList.toggle('visible');
 
     if(spanElements.classList.contains('visible')) {
-        passwordImg.src = '../assets/eye-off.svg';
+        passwordImg.src = './assets/eye-off.svg';
         passwordInputsElements.type = 'text'
     } else {
-        passwordImg.src = '../assets/eye.svg';
+        passwordImg.src = './assets/eye.svg';
         passwordInputsElements.type = 'password'
     }
 });

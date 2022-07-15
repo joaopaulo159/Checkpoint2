@@ -84,7 +84,7 @@ userPasswordConfirm.addEventListener('keyup', event => {
                         if(response.ok == true) {
     
                             alert('Parabéns! Usuário criado com sucesso.')
-                            window.location = '../index.html'
+                            window.location = './index.html'
     
                         } else {
     
@@ -142,10 +142,10 @@ passwordImg.addEventListener('click', event => {
     spanElements.classList.toggle('visible');
 
     if(spanElements.classList.contains('visible')) {
-        passwordImg.src = '../assets/eye-off.svg';
+        passwordImg.src = './assets/eye-off.svg';
         passwordInputsElements.type = 'text'
     } else {
-        passwordImg.src = '../assets/eye.svg';
+        passwordImg.src = './assets/eye.svg';
         passwordInputsElements.type = 'password'
     }
 });
